@@ -1,0 +1,30 @@
+<svg width="256" height="256" viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Xoraix logo">
+  <defs>
+    <linearGradient id="brandGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#14b8ff"/>
+      <stop offset="45%" stop-color="#0d8ef4"/>
+      <stop offset="100%" stop-color="#0b4ecd"/>
+    </linearGradient>
+  </defs>
+
+  <g fill="none" stroke="url(#brandGradient)" stroke-linecap="round" stroke-width="14">
+    <path d="M34 86C62 34 93 24 128 24C163 24 194 34 222 86"/>
+    <path d="M34 170C62 222 93 232 128 232C163 232 194 222 222 170"/>
+    <path d="M72 32C40 78 34 123 52 169C60 188 74 206 98 220" opacity="0.9"/>
+    <path d="M184 32C216 78 222 123 204 169C196 188 182 206 158 220" opacity="0.9"/>
+  </g>
+
+  <g fill="#0a5ad8">
+    <circle cx="128" cy="24" r="12"/>
+    <circle cx="34" cy="86" r="12"/>
+    <circle cx="222" cy="86" r="12"/>
+    <circle cx="34" cy="170" r="12"/>
+    <circle cx="222" cy="170" r="12"/>
+    <circle cx="128" cy="232" r="12"/>
+  </g>
+
+  <g fill="none" stroke="url(#brandGradient)" stroke-width="26" stroke-linecap="round">
+    <path d="M78 64L178 192"/>
+    <path d="M178 64L78 192"/>
+  </g>
+</svg>

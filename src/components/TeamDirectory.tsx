@@ -9,7 +9,6 @@ import {
   ChevronRight,
   ShieldCheck,
   Mail,
-  Search,
   CheckCircle2,
   ExternalLink,
   MapPin,
@@ -29,7 +28,6 @@ export default function TeamDirectory({
   isWhiteMode = false,
 }: TeamDirectoryProps) {
   const [filterRole, setFilterRole] = useState<string>('All');
-  const [searchQuery, setSearchQuery] = useState<string>('');
 
   const filterTabs = [
     'All',
@@ -68,28 +66,18 @@ export default function TeamDirectory({
         if (!matchesRole) return false;
       }
 
-      // Search query
-      if (searchQuery.trim()) {
-        const query = searchQuery.toLowerCase().trim();
-        const matchesName = m.name.toLowerCase().includes(query);
-        const matchesRole = m.role.toLowerCase().includes(query);
-        const matchesDesc = m.description.toLowerCase().includes(query);
-        const matchesSkills = m.featuredSkills.some((s) => s.toLowerCase().includes(query));
-        if (!matchesName && !matchesRole && !matchesDesc && !matchesSkills) return false;
-      }
-
       return true;
     });
-  }, [members, filterRole, searchQuery]);
+  }, [members, filterRole]);
 
   return (
-    <section className="min-h-screen py-12 md:py-20 relative overflow-hidden" id="team-directory">
+    <section className="min-h-screen py-12 md:py-20 relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Top Hero Banner */}
         <div className="text-center max-w-4xl mx-auto mb-14">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-cyan-950/80 border border-cyan-800 text-cyan-300 text-xs font-mono mb-5 shadow-sm backdrop-blur-sm">
             <Users className="w-3.5 h-3.5 text-cyan-400" />
-            <span>Xoraix Technologies · Core Engineering Team Directory</span>
+            <span>Team</span>
           </div>
 
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-[1.12]">
@@ -123,31 +111,10 @@ export default function TeamDirectory({
             </div>
           </div>
 
-          {/* Search & Filter Controls */}
-          <div className="mt-10 flex flex-col sm:flex-row items-center justify-between gap-4 max-w-4xl mx-auto">
-            {/* Live Search Input */}
-            <div className="relative w-full sm:w-72">
-              <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
-              <input
-                type="text"
-                placeholder="Search engineer or skill..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-9 pr-4 py-2.5 rounded-xl bg-brand-surface/90 border border-brand-border text-xs font-mono text-white placeholder-slate-400 focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 transition-colors"
-              />
-              {searchQuery && (
-                <button
-                  type="button"
-                  onClick={() => setSearchQuery('')}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-slate-400 hover:text-white"
-                >
-                  ✕
-                </button>
-              )}
-            </div>
-
+          {/* Filter Controls */}
+          <div className="mt-10 flex items-center justify-center max-w-4xl mx-auto">
             {/* Filter Pills */}
-            <div className="flex flex-wrap items-center justify-center sm:justify-end gap-1.5 w-full sm:w-auto">
+            <div className="flex flex-wrap items-center justify-center gap-1.5 w-full sm:w-auto">
               {filterTabs.map((tab) => {
                 const isActive = filterRole === tab;
                 return (
@@ -170,14 +137,7 @@ export default function TeamDirectory({
             </div>
           </div>
 
-          <div className="mt-3 flex items-center justify-between text-[11px] font-mono text-slate-400 px-1">
-            <span>
-              Showing <span className="text-cyan-400 font-bold">{filteredMembers.length}</span> of {members.length} team profiles
-            </span>
-            <span className="text-cyan-400/90 hidden sm:inline">
-              Click on any card to view detailed CV, education, & projects
-            </span>
-          </div>
+          <div className="mt-3 text-[11px] font-mono text-slate-400 px-1" />
         </div>
 
         {/* Team Grid (Card Tiles) */}
@@ -189,12 +149,12 @@ export default function TeamDirectory({
               className="glass-card rounded-3xl border border-brand-border hover:border-cyan-500/60 transition-all duration-300 overflow-hidden flex flex-col group cursor-pointer shadow-xl hover:-translate-y-2 hover:shadow-cyan-500/15"
             >
               {/* Card Photo Tile Container */}
-              <div className="relative aspect-[16/11] w-full bg-slate-900 overflow-hidden">
+              <div className="relative aspect-[16/15] w-full bg-slate-900 overflow-hidden">
                 <img
                   src={member.avatarUrl}
                   alt={member.name}
                   loading="lazy"
-                  className="w-full h-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-105"
+                  className="w-full h-full object-cover object-top"
                   onError={(e) => {
                     // Fallback to stylized abstract background if photo missing
                     (e.currentTarget as HTMLImageElement).src = '/images/laptop-bg.jpg';
@@ -296,7 +256,6 @@ export default function TeamDirectory({
               type="button"
               onClick={() => {
                 setFilterRole('All');
-                setSearchQuery('');
               }}
               className="mt-4 px-4 py-2 rounded-lg bg-cyan-950 border border-cyan-800 text-xs font-mono text-cyan-300 hover:bg-cyan-900 transition-colors cursor-pointer"
             >

@@ -29,7 +29,7 @@ export default function ResumeModal({
           <div className="flex items-center gap-2">
             <span className="w-2.5 h-2.5 rounded-full bg-cyan-400" />
             <span className="text-xs font-mono font-bold uppercase text-white tracking-wider truncate max-w-xs sm:max-w-md">
-              Curriculum Vitae · {personal.name}
+              Profile · {personal.name}
             </span>
           </div>
 

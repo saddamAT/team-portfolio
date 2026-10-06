@@ -96,10 +96,10 @@ export default function Hero({ personal = PROFILE, onOpenResume }: HeroProps) {
                   type="button"
                   onClick={onOpenResume}
                   className="px-5 py-3.5 rounded-xl bg-brand-surface hover:bg-brand-elevated border border-brand-border text-slate-200 font-semibold text-sm flex items-center gap-2 transition-all cursor-pointer"
-                  title="View / Download Resume"
+                  title="View / Download Profile"
                 >
                   <FileText className="w-4 h-4 text-cyan-400" />
-                  <span>View CV</span>
+                  <span>View Profile</span>
                 </button>
               )}
 

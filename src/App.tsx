@@ -21,8 +21,48 @@ import {
   TEAM_MEMBERS,
   getPortfolioById,
 } from './data/portfolioData';
-import type { PortfolioData } from './types';
-import { ArrowLeft, Users, Sparkles } from 'lucide-react';
+import type { PortfolioData, PersonalInfo, ContactConfig } from './types';
+import { Users, Sparkles } from 'lucide-react';
+
+const XORAIX_TECH_CONTACT: PersonalInfo = {
+  name: 'Xoraix Technologies',
+  initials: 'XT',
+  role: 'Technology Studio',
+  headline: 'Contact Xoraix Technologies',
+  shortBio: 'Product engineering partner for AI systems, cloud platforms, and modern digital experiences.',
+  email: 'contact@xoraixtechnologies.com',
+  phone: '+1 914 520 6076',
+  location: 'Remote / Global',
+  status: 'Building high-impact software products and AI workflows worldwide',
+  hireable: true,
+  highlights: [],
+  socials: {
+    linkedin: 'https://linkedin.com/company/xoraix',
+    website: 'https://xoraixtechnologies.com',
+    email: 'contact@xoraixtechnologies.com',
+    phone: '+1 914 520 6076',
+  },
+};
+
+const XORAIX_CONTACT_CONFIG: ContactConfig = {
+  headline: 'Contact Xoraix Technologies',
+  subtext:
+    'Need a senior engineering partner for product development, AI automation, cloud systems, or full-stack delivery? Let’s talk about your roadmap and build the next phase together.',
+  availableNotice: 'Global Remote • Product Engineering & AI Systems',
+  projectTypes: [
+    'AI Product Development',
+    'Full-Stack SaaS Engineering',
+    'Cloud Architecture & Platform Design',
+    'Workflow Automation & AI Systems',
+    'Performance Optimization & Product Scaling',
+  ],
+  budgetOptions: [
+    'Consulting / Advisory',
+    'Project-Based Engagement',
+    'Retainer Partnership',
+    'Full-Time / Nearshore Team',
+  ],
+};
 
 export default function App() {
   // Determine initial view and active developer from URL
@@ -74,6 +114,20 @@ export default function App() {
       document.documentElement.classList.add('dark');
     }
   }, [isWhiteMode]);
+
+  useEffect(() => {
+    const hash = window.location.hash.replace('#', '');
+    if (!hash) return;
+
+    const timer = window.setTimeout(() => {
+      const el = document.getElementById(hash);
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }, 50);
+
+    return () => window.clearTimeout(timer);
+  }, [view, activePortfolio]);
 
   // Dynamically update document title, meta tags, and JSON-LD
   useEffect(() => {
@@ -223,32 +277,15 @@ export default function App() {
             onSelectMember={handleSelectMember}
             isWhiteMode={isWhiteMode}
           />
+
+          <ContactSection
+            personal={XORAIX_TECH_CONTACT}
+            config={XORAIX_CONTACT_CONFIG}
+          />
         </main>
       ) : (
         /* VIEW 2: Employee Specific Detail Page */
         <main className="relative z-10">
-          {/* Top Quick Breadcrumb Strip */}
-          <div className="border-b border-brand-border/70 bg-brand-surface/60 backdrop-blur-md px-4 sm:px-6 lg:px-8 py-3">
-            <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-3">
-              <button
-                type="button"
-                onClick={handleShowTeam}
-                className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-cyan-950/80 hover:bg-cyan-900/80 text-cyan-300 text-xs font-mono font-bold border border-cyan-800 transition-all cursor-pointer shadow-sm hover:scale-105"
-              >
-                <ArrowLeft className="w-3.5 h-3.5" />
-                <span>← Back to All Team Members</span>
-              </button>
-
-              <div className="flex items-center gap-2 text-xs font-mono text-slate-300">
-                <span className="text-slate-400">Viewing Portfolio:</span>
-                <span className="font-bold text-white">{activePortfolio.personal.name}</span>
-                <span className="text-cyan-400 text-[11px] hidden sm:inline">
-                  ({activePortfolio.personal.role})
-                </span>
-              </div>
-            </div>
-          </div>
-
           {/* Hero Section */}
           <Hero
             personal={activePortfolio.personal}
@@ -299,8 +336,8 @@ export default function App() {
 
       {/* Footer */}
       <Footer
-        personal={activePortfolio.personal}
-        onOpenResume={() => setIsResumeOpen(true)}
+        personal={view === 'team' ? XORAIX_TECH_CONTACT : activePortfolio.personal}
+        onOpenResume={view === 'team' ? undefined : () => setIsResumeOpen(true)}
         onShowTeam={handleShowTeam}
       />
 
