@@ -788,9 +788,8 @@ export const ARSLAN_SYED_PORTFOLIO: PortfolioData = {
     name: "Arslan Syed",
     initials: "AS",
     role: "Senior Full Stack & AI Engineer",
-    secondaryTitle: "Agentic AI & Workflow Automation",
     headline:
-      "Building Agentic AI, AI Automation, and Intelligent SaaS Workflows.",
+      "Building Agentic AI, AI Automation, and Intelligent SaaS Workflows",
     shortBio:
       "Senior Full Stack Engineer with 7+ years of experience building web applications, APIs, and cloud services. Recent work includes multi-agent accounts-payable automation and invoice OCR at Aimyable, team leadership at Inner Machinations, and full-stack roles at Meshlogix Solutions, Banyo Ltd, and Bright Byte Solutions. Experienced with Django REST Framework, Next.js, TypeScript, Node.js, React, PostgreSQL, AWS, and MapBox.",
     aboutText: [
@@ -1411,8 +1410,7 @@ export const SADDAM_HUSSAIN_PORTFOLIO: PortfolioData = {
     name: "Saddam Hussain",
     initials: "SH",
     role: "Senior Full Stack Engineer & AI Systems Architect",
-    secondaryTitle: "Production AI Pipelines & Resilient Cloud Systems",
-    headline: "Senior Full-Stack Engineer Building Production AI SaaS.",
+    headline: "Senior Full-Stack Engineer Building Production AI SaaS",
     shortBio:
       "8+ years building and shipping high-throughput production web applications, specializing in Python (Django DRF, FastAPI), TypeScript (Next.js, React), and Production AI Automations. Proven track record designing OCR document pipelines, WebSocket RPA bridges, and resilient cloud architectures.",
     aboutText: [
@@ -1429,8 +1427,6 @@ export const SADDAM_HUSSAIN_PORTFOLIO: PortfolioData = {
     avatarUrl:
       "https://lh3.googleusercontent.com/aida-public/AB6AXuDUXj0YyXL2kNfqhE40wIbhZEajbpBCBmk0afk46ERZD3sW4VUmlCFbn9LTJoVDp7zjMOEk37r9JS4sZjh2YUZlMGal6vEvbA8Go-Z5oUtwoemXirPVH9HDBaUVNQOufN8zcfgvz92tTAW1wghyT_kw1BQAbLIxK9tiK5nolqUlt95imv40Gc1ZlzS59KfQxyK5uzUbXZ1ohH-uXD62CqFXiz22EA6OKm-wMYF8gfSDG7Ejfhkvw68VkhpkQCo8wmM8Ug",
     highlights: [
-      "Python (Django DRF, FastAPI)",
-      "TypeScript (Next.js App Router, React)",
       "Production AI Pipelines & LLM Evals",
       "Docker Containerization & AWS Cloud Infrastructure",
     ],
@@ -2095,7 +2091,8 @@ export const ABU_BAKAR_PORTFOLIO: PortfolioData = {
     initials: "AB",
     role: "Senior Full Stack Engineer",
     secondaryTitle: "Full Stack Engineer + AI Engineer",
-    headline: "Senior Full Stack Engineer Building AI-Powered SaaS & Modern Web Apps.",
+    headline:
+      "Senior Full Stack Engineer Building AI-Powered SaaS & Modern Web Apps SaaS Workflows",
     shortBio:
       "Senior full-stack software engineer with experience building AI-powered SaaS products, responsive Next.js interfaces, Django APIs, and workflow automation systems across remote and product-focused teams.",
     aboutText: [
@@ -2240,7 +2237,7 @@ export const ABU_BAKAR_PORTFOLIO: PortfolioData = {
         "Performed real-time inventory management with Django REST Framework and MongoDB, reducing latency by 30% and enhancing the accuracy of stock and sales data synchronization.",
         "Developed a responsive UI of the POS system using Next.js, significantly increasing user satisfaction through seamless server-side rendering.",
         "Configured a scalable and secure AWS architecture (EC2 instances), bolstering transaction security and system reliability and supporting a 50% user base growth without performance loss.",
-        "Set up a CI/CD pipeline using Git and GitHub Actions, removing the need for manual deployment efforts."
+        "Set up a CI/CD pipeline using Git and GitHub Actions, removing the need for manual deployment efforts.",
       ],
       technologies: [
         "Next.js",
@@ -2269,7 +2266,7 @@ export const ABU_BAKAR_PORTFOLIO: PortfolioData = {
         "Designed and implemented reusable UI architecture for data tables, filters, forms, modals, and conversation panels, improving development speed and interface consistency.",
         "Integrated REST APIs for ticket operations, user management, department configuration, permissions, comments, and attachments.",
         "Applied TypeScript-based type safety and component-driven development practices to improve code quality, maintainability, and frontend stability.",
-        "Added frontend testing and quality checks using React Testing Library for key screens and components, improving reliability of the ticketing platform."
+        "Added frontend testing and quality checks using React Testing Library for key screens and components, improving reliability of the ticketing platform.",
       ],
       technologies: [
         "React.js",
@@ -2345,7 +2342,8 @@ export const KAMRAN_MAQBOOL_PORTFOLIO: PortfolioData = {
     initials: "KM",
     role: "Python Developer",
     secondaryTitle: "Python Backend Developer",
-    headline: "Detail-oriented Python developer with 5+ years of backend and AI integration experience.",
+    headline:
+      "Detail-oriented Python developer with 5+ years of backend and AI integration experience.",
     shortBio:
       "Detail-oriented and results-driven Python developer with over 5 years of experience in web development, primarily focused on backend development using Django and Django Rest Framework. Proven expertise in building scalable, maintainable APIs and services, integrating third-party tools, and working in agile environments. Passionate about integrating AI/ML solutions into backend systems.",
     aboutText: [
@@ -2447,7 +2445,8 @@ export const KAMRAN_MAQBOOL_PORTFOLIO: PortfolioData = {
     {
       id: "federation-ai-proj",
       title: "Federation AI",
-      projectTitle: "Federation AI — Slack/Jira Reporting & Predictive Analytics",
+      projectTitle:
+        "Federation AI — Slack/Jira Reporting & Predictive Analytics",
       category: "AI SaaS",
       imageUrl: "/images/about1.jpg",
       description:
@@ -2479,7 +2478,7 @@ export const KAMRAN_MAQBOOL_PORTFOLIO: PortfolioData = {
         "Developed and maintained scalable backend systems using Django and Django Rest Framework.",
         "Collaborated with AI teams to integrate machine learning models into Django-based applications.",
         "Integrated AI/ML components and handled background task processing using Celery and RabbitMQ.",
-        "Implemented cron jobs for keyword crawling and automation."
+        "Implemented cron jobs for keyword crawling and automation.",
       ],
       technologies: [
         "Python",
@@ -2500,7 +2499,7 @@ export const KAMRAN_MAQBOOL_PORTFOLIO: PortfolioData = {
         "Focused on backend using Django and Django Rest Framework.",
         "Developed background workers and integrated external APIs.",
         "Participated in design discussions and deployment automation.",
-        "Explored AI concepts for keyword searching tools, including basic data analysis and trend prediction."
+        "Explored AI concepts for keyword searching tools, including basic data analysis and trend prediction.",
       ],
       technologies: [
         "Python",
@@ -2519,7 +2518,7 @@ export const KAMRAN_MAQBOOL_PORTFOLIO: PortfolioData = {
       bulletPoints: [
         "Developed web applications including HRMS, Autoshine, and an Upwork-style freelancing platform.",
         "Worked with Laravel, AngularJS, React.js, and Vue.js.",
-        "Contributed to frontend and backend development using agile methods."
+        "Contributed to frontend and backend development using agile methods.",
       ],
       technologies: [
         "Laravel",
@@ -2557,7 +2556,12 @@ export const KAMRAN_MAQBOOL_PORTFOLIO: PortfolioData = {
         "Scikit-learn (Basic)",
         "Machine Learning Integration",
       ],
-      featuredSkills: ["Pandas", "NumPy", "Langchain", "Machine Learning Integration"],
+      featuredSkills: [
+        "Pandas",
+        "NumPy",
+        "Langchain",
+        "Machine Learning Integration",
+      ],
     },
     {
       name: "DevOps & Infrastructure",
@@ -2949,6 +2953,13 @@ export const ALL_PROFILES: PortfolioData[] = [
   SYED_FARHAN_SAEED_PORTFOLIO,
 ];
 
+export function getExactPortfolioById(
+  id: string | null | undefined,
+): PortfolioData | undefined {
+  if (!id) return undefined;
+  return ALL_PROFILES.find((profile) => profile.id === id);
+}
+
 /**
  * Resolves a portfolio by ID or commonly used alias.
  * Supports:
@@ -2992,6 +3003,34 @@ export function getPortfolioById(
       p.id === idOrAlias || p.personal.name.toLowerCase().includes(cleaned),
   );
   return found || SADDAM_HUSSAIN_PORTFOLIO;
+}
+
+export function getProjectById(
+  portfolioId: string | null | undefined,
+  projectId: string | null | undefined,
+): { portfolio: PortfolioData; project: ProjectGalleryItem } | undefined {
+  if (!projectId) return undefined;
+
+  const exactPortfolio = getExactPortfolioById(portfolioId);
+  const profilesToSearch = exactPortfolio ? [exactPortfolio] : ALL_PROFILES;
+
+  for (const portfolio of profilesToSearch) {
+    const project = portfolio.projectGallery?.find(
+      (item) => item.id === projectId,
+    );
+    if (project) {
+      return { portfolio, project };
+    }
+  }
+
+  return undefined;
+}
+
+export function getProjectDetailPath(
+  portfolioId: string,
+  projectId: string,
+): string {
+  return `/projects/${encodeURIComponent(portfolioId)}/${encodeURIComponent(projectId)}`;
 }
 
 /**

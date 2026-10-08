@@ -7,7 +7,8 @@ import { DEFAULT_PORTFOLIO } from '../data/portfolioData';
  */
 export async function submitContactAction(
   formData: ContactFormData,
-  targetDevName?: string
+  targetDevName?: string,
+  targetDevEmail?: string,
 ): Promise<ActionResponse<{ id: string; timestamp: string }>> {
   // Client-side validation before dispatch
   if (!formData.name.trim()) {
@@ -21,6 +22,11 @@ export async function submitContactAction(
   }
 
   const devName = targetDevName || DEFAULT_PORTFOLIO.personal.name;
+  const payload: ContactFormData = {
+    ...formData,
+    targetName: devName,
+    targetEmail: targetDevEmail || DEFAULT_PORTFOLIO.personal.email,
+  };
 
   try {
     const res = await fetch('/api/contact', {
@@ -28,14 +34,14 @@ export async function submitContactAction(
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(formData),
+      body: JSON.stringify(payload),
     });
 
     if (res.ok) {
       const data = await res.json();
       return {
         success: true,
-        message: data.message || `Inquiry successfully transmitted. ${devName} will reply within 24 hours.`,
+        message: data.message || `Inquiry successfully transmitted to ${devName}.`,
         data: {
           id: data.submissionId || `sub_${Date.now()}`,
           timestamp: data.receivedAt || new Date().toISOString(),
@@ -49,16 +55,10 @@ export async function submitContactAction(
       };
     }
   } catch (error) {
-    console.warn('Backend endpoint unreachable, running offline validated action:', error);
-    // Graceful offline fallback simulation with real delay
-    await new Promise((resolve) => setTimeout(resolve, 800));
     return {
-      success: true,
-      message: `Inquiry logged successfully! ${devName} will review and respond to your email within 24 hours.`,
-      data: {
-        id: `offline_sub_${Date.now()}`,
-        timestamp: new Date().toISOString(),
-      },
+      success: false,
+      error:
+        'Contact email delivery is unavailable right now. Please use the direct email link instead.',
     };
   }
 }

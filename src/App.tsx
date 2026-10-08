@@ -1,3 +1,5 @@
+'use client';
+
 import { useState, useEffect } from 'react';
 import ParticleCanvas from './components/ParticleCanvas';
 import ScrollProgress from './components/ScrollProgress';
@@ -64,38 +66,18 @@ const XORAIX_CONTACT_CONFIG: ContactConfig = {
   ],
 };
 
-export default function App() {
-  // Determine initial view and active developer from URL
-  const [view, setView] = useState<'team' | 'member'>(() => {
-    if (typeof window !== 'undefined') {
-      const params = new URLSearchParams(window.location.search);
-      const queryDev = params.get('profile') || params.get('dev') || params.get('id');
-      if (queryDev) {
-        return 'member';
-      }
-      const path = window.location.pathname.replace(/^\//, '').toLowerCase();
-      if (path && (path.includes('saddam') || path.includes('arslan') || path.includes('farhan') || path.includes('bakar') || path.includes('kamran') || path.includes('taha'))) {
-        return 'member';
-      }
-    }
-    // Default to the Team Homepage with card tiles as requested
-    return 'team';
-  });
+interface AppProps {
+  initialProfileId?: string;
+}
 
-  const [activePortfolio, setActivePortfolio] = useState<PortfolioData>(() => {
-    if (typeof window !== 'undefined') {
-      const params = new URLSearchParams(window.location.search);
-      const queryDev = params.get('profile') || params.get('dev') || params.get('id');
-      if (queryDev) {
-        return getPortfolioById(queryDev);
-      }
-      const path = window.location.pathname.replace(/^\//, '').toLowerCase();
-      if (path) {
-        return getPortfolioById(path);
-      }
-    }
-    return DEFAULT_PORTFOLIO;
-  });
+export default function App({ initialProfileId }: AppProps) {
+  const [view, setView] = useState<'team' | 'member'>(
+    initialProfileId ? 'member' : 'team',
+  );
+
+  const [activePortfolio, setActivePortfolio] = useState<PortfolioData>(() =>
+    initialProfileId ? getPortfolioById(initialProfileId) : DEFAULT_PORTFOLIO,
+  );
 
   const [isResumeOpen, setIsResumeOpen] = useState(false);
   const [isWhiteMode, setIsWhiteMode] = useState<boolean>(() => {
@@ -299,6 +281,7 @@ export default function App() {
           <ProjectGallery
             projects={activePortfolio.projectGallery}
             developerName={activePortfolio.personal.name}
+            portfolioId={activePortfolio.id}
           />
 
           {/* Flagship Case Studies */}

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Copy, Check, MapPin, Sparkles, Linkedin, Github, Globe, ArrowRight, Layers, FileText } from 'lucide-react';
+import { Copy, Check, MapPin, Sparkles, Linkedin, Github, Globe, ArrowRight, FileText } from 'lucide-react';
 import type { PersonalInfo } from '../types';
 import { PROFILE } from '../data/portfolioData';
 
@@ -215,20 +215,6 @@ export default function Hero({ personal = PROFILE, onOpenResume }: HeroProps) {
                 </div>
               </div>
 
-              {/* Floating Tech Architecture Chip */}
-              <div className="absolute -bottom-5 -left-4 sm:-left-6 glass-card p-3 rounded-xl border border-cyan-500/40 shadow-xl hidden sm:flex items-center gap-3">
-                <div className="w-8 h-8 rounded-lg bg-cyan-500/20 text-cyan-400 flex items-center justify-center font-mono font-bold text-sm">
-                  <Layers className="w-4 h-4" />
-                </div>
-                <div>
-                  <div className="text-[11px] font-semibold text-white">
-                    {personal.highlights?.[0] || 'Technical Architecture'}
-                  </div>
-                  <div className="text-[10px] text-slate-400 font-mono">
-                    {personal.highlights?.[1] || 'Scalable Production Systems'}
-                  </div>
-                </div>
-              </div>
             </div>
           </div>
         </div>

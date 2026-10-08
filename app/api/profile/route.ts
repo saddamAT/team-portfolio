@@ -1,12 +1,14 @@
-import type { Request, Response } from 'express';
-import { getPortfolioById, ALL_PROFILES } from '../src/data/portfolioData';
+import { NextResponse } from 'next/server';
+import { ALL_PROFILES, getPortfolioById } from '@/src/data/portfolioData';
 
-export default function handler(req: Request, res: Response) {
-  const profileId = (req.query.id || req.query.profile || req.query.dev) as string;
+export function GET(request: Request) {
+  const { searchParams } = new URL(request.url);
+  const profileId =
+    searchParams.get('id') || searchParams.get('profile') || searchParams.get('dev') || undefined;
   const portfolio = getPortfolioById(profileId);
   const { personal, metrics } = portfolio;
 
-  res.status(200).json({
+  return NextResponse.json({
     id: portfolio.id,
     name: personal.name,
     title: personal.role,
@@ -17,6 +19,8 @@ export default function handler(req: Request, res: Response) {
     phone: personal.phone || null,
     status: personal.status,
     headline: personal.headline,
+    highlights: personal.highlights,
+    metrics: metrics.map((m) => ({ label: m.label, value: m.value })),
     availableProfiles: ALL_PROFILES.map((p) => ({
       id: p.id,
       name: p.personal.name,

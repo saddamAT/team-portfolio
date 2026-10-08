@@ -1,12 +1,11 @@
 import { useState, useMemo } from 'react';
+import Link from 'next/link';
 import {
   ExternalLink,
   Github,
   Sparkles,
   Layers,
   CheckCircle2,
-  AlertCircle,
-  X,
   Eye,
   BarChart3,
   TrendingUp,
@@ -15,22 +14,24 @@ import {
   Code2,
 } from 'lucide-react';
 import type { ProjectGalleryItem } from '../types';
+import { getProjectDetailPath } from '../data/portfolioData';
 
 interface ProjectGalleryProps {
   projects?: ProjectGalleryItem[];
   developerName?: string;
+  portfolioId?: string;
 }
 
 export default function ProjectGallery({
   projects = [],
   developerName = 'Developer',
+  portfolioId = 'saddam-hussain',
 }: ProjectGalleryProps) {
   if (!projects || projects.length === 0) return null;
 
   // Extract unique categories for dynamic filter tabs
   const categories = ['All', ...Array.from(new Set(projects.map((p) => p.category).filter(Boolean)))];
   const [activeCategory, setActiveCategory] = useState('All');
-  const [selectedProject, setSelectedProject] = useState<ProjectGalleryItem | null>(null);
   const [statsTab, setStatsTab] = useState<'languages' | 'completion'>('languages');
 
   const filteredProjects =
@@ -158,15 +159,19 @@ export default function ProjectGallery({
 
         {/* Projects Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-          {filteredProjects.map((project) => (
+          {filteredProjects.map((project) => {
+            const detailHref = getProjectDetailPath(portfolioId, project.id);
+
+            return (
             <div
               key={project.id}
               className="glass-card rounded-2xl border border-brand-border hover:border-cyan-500/40 transition-all duration-300 flex flex-col overflow-hidden group shadow-xl hover:-translate-y-1 hover:shadow-cyan-500/10"
             >
               {/* Project Image Thumbnail */}
-              <div
-                className="relative aspect-[16/10] w-full bg-brand-elevated overflow-hidden cursor-pointer"
-                onClick={() => setSelectedProject(project)}
+              <Link
+                href={detailHref}
+                className="relative aspect-[16/10] w-full bg-brand-elevated overflow-hidden cursor-pointer block"
+                aria-label={`Open details for ${project.title}`}
               >
                 {project.imageUrl ? (
                   <img
@@ -194,18 +199,15 @@ export default function ProjectGallery({
                     <span>View Details</span>
                   </span>
                 </div>
-              </div>
+              </Link>
 
               {/* Card Body */}
               <div className="p-6 flex-1 flex flex-col justify-between">
                 <div>
                   <div className="flex items-start justify-between gap-2 mb-2">
-                    <h3
-                      className="text-lg font-bold text-white group-hover:text-cyan-400 transition-colors cursor-pointer"
-                      onClick={() => setSelectedProject(project)}
-                    >
+                    <Link href={detailHref} className="text-lg font-bold text-white group-hover:text-cyan-400 transition-colors cursor-pointer">
                       {project.title}
-                    </h3>
+                    </Link>
                   </div>
 
                   {project.projectTitle && project.projectTitle !== project.title && (
@@ -239,14 +241,13 @@ export default function ProjectGallery({
 
                   {/* Action Buttons */}
                   <div className="flex items-center gap-2 pt-3 border-t border-brand-border/70">
-                    <button
-                      type="button"
-                      onClick={() => setSelectedProject(project)}
+                    <Link
+                      href={detailHref}
                       className="flex-1 py-2 px-3 rounded-lg bg-brand-elevated hover:bg-brand-border text-cyan-300 text-xs font-mono font-medium transition-colors border border-brand-border text-center flex items-center justify-center gap-1.5 cursor-pointer"
                     >
                       <Layers className="w-3.5 h-3.5" />
                       <span>Details & Spec</span>
-                    </button>
+                    </Link>
 
                     {project.liveUrl && (
                       <a
@@ -275,7 +276,8 @@ export default function ProjectGallery({
                 </div>
               </div>
             </div>
-          ))}
+            );
+          })}
         </div>
 
         {/* =====================================================================
@@ -449,143 +451,6 @@ export default function ProjectGallery({
         </div>
       </div>
 
-      {/* Interactive Project Details Modal */}
-      {selectedProject && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/85 backdrop-blur-md overflow-y-auto">
-          <div className="relative w-full max-w-3xl bg-brand-surface border border-brand-border rounded-2xl shadow-2xl overflow-hidden my-auto max-h-[92vh] flex flex-col">
-            {/* Modal Header */}
-            <div className="flex items-center justify-between px-6 py-4 border-b border-brand-border bg-brand-dark">
-              <div className="flex items-center gap-2.5">
-                <span className="w-2.5 h-2.5 rounded-full bg-cyan-400" />
-                <div>
-                  <span className="text-xs font-mono font-bold uppercase text-white tracking-wider">
-                    {selectedProject.title}
-                  </span>
-                  <span className="ml-2 text-[10px] font-mono text-cyan-400 px-2 py-0.5 rounded bg-cyan-950 border border-cyan-800">
-                    {selectedProject.category}
-                  </span>
-                </div>
-              </div>
-
-              <button
-                type="button"
-                onClick={() => setSelectedProject(null)}
-                className="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-brand-surface transition-colors cursor-pointer"
-                title="Close"
-              >
-                <X className="w-5 h-5" />
-              </button>
-            </div>
-
-            {/* Modal Body */}
-            <div className="p-6 sm:p-8 overflow-y-auto space-y-6">
-              {/* Image Preview */}
-              {selectedProject.imageUrl && (
-                <div className="rounded-xl overflow-hidden border border-brand-border max-h-72 bg-brand-dark">
-                  <img
-                    src={selectedProject.imageUrl}
-                    alt={selectedProject.title}
-                    className="w-full h-full object-cover object-top"
-                  />
-                </div>
-              )}
-
-              <div>
-                <h3 className="text-xl font-bold text-white mb-1">
-                  {selectedProject.projectTitle || selectedProject.title}
-                </h3>
-                {selectedProject.role && (
-                  <div className="text-xs font-mono text-cyan-400 mb-3">
-                    Role: {selectedProject.role}
-                  </div>
-                )}
-                <p className="text-sm text-slate-300 leading-relaxed">
-                  {selectedProject.description}
-                </p>
-              </div>
-
-              {/* Engineering Challenges */}
-              {selectedProject.challenges && selectedProject.challenges.length > 0 && (
-                <div className="p-4 rounded-xl bg-brand-elevated border border-brand-border space-y-2">
-                  <div className="flex items-center gap-2 text-xs font-mono font-bold text-amber-400 uppercase tracking-wide">
-                    <AlertCircle className="w-4 h-4 text-amber-400" />
-                    <span>Technical Challenges</span>
-                  </div>
-                  <ul className="space-y-1.5 text-xs text-slate-300 list-disc list-inside ml-1">
-                    {selectedProject.challenges.map((ch, idx) => (
-                      <li key={idx} className="leading-relaxed">
-                        {ch}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              )}
-
-              {/* Engineering Solutions */}
-              {selectedProject.solutions && selectedProject.solutions.length > 0 && (
-                <div className="p-4 rounded-xl bg-cyan-950/30 border border-cyan-800/60 space-y-2">
-                  <div className="flex items-center gap-2 text-xs font-mono font-bold text-cyan-300 uppercase tracking-wide">
-                    <CheckCircle2 className="w-4 h-4 text-cyan-400" />
-                    <span>Engineering Solutions & Architecture</span>
-                  </div>
-                  <ul className="space-y-1.5 text-xs text-slate-200 list-disc list-inside ml-1">
-                    {selectedProject.solutions.map((sol, idx) => (
-                      <li key={idx} className="leading-relaxed">
-                        {sol}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              )}
-
-              {/* Technology Stack */}
-              <div>
-                <div className="text-xs font-mono uppercase text-slate-400 font-bold mb-2">
-                  Technologies Utilized
-                </div>
-                <div className="flex flex-wrap gap-2">
-                  {selectedProject.techStack.map((tech) => (
-                    <span
-                      key={tech}
-                      className="px-3 py-1 rounded-lg text-xs font-mono bg-brand-elevated text-cyan-300 border border-brand-border"
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-              </div>
-
-              {/* Links */}
-              {(selectedProject.liveUrl || selectedProject.githubUrl) && (
-                <div className="flex flex-wrap gap-3 pt-4 border-t border-brand-border">
-                  {selectedProject.liveUrl && (
-                    <a
-                      href={selectedProject.liveUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="px-4 py-2 rounded-xl bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-500 hover:to-cyan-500 text-white font-semibold text-xs font-mono flex items-center gap-2 shadow-glow-cyan"
-                    >
-                      <ExternalLink className="w-3.5 h-3.5" />
-                      <span>Visit Live Application</span>
-                    </a>
-                  )}
-                  {selectedProject.githubUrl && (
-                    <a
-                      href={selectedProject.githubUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="px-4 py-2 rounded-xl bg-brand-elevated hover:bg-brand-border text-white font-medium text-xs font-mono flex items-center gap-2 border border-brand-border"
-                    >
-                      <Github className="w-3.5 h-3.5" />
-                      <span>View Source Code</span>
-                    </a>
-                  )}
-                </div>
-              )}
-            </div>
-          </div>
-        </div>
-      )}
     </section>
   );
 }

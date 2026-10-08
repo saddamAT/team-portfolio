@@ -195,6 +195,8 @@ export interface ContactFormData {
   projectType: string;
   budget?: string;
   message: string;
+  targetName?: string;
+  targetEmail?: string;
 }
 
 export interface ActionResponse<T = unknown> {
