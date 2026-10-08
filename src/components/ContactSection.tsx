@@ -323,10 +323,10 @@ export default function ContactSection({
                   Name *
                 </label>
                 <input
-                  id="Full Name"
+                  id="name"
                   type="text"
                   required
-                  placeholder="name"
+                  placeholder="Full Name"
                   value={formData.name}
                   onChange={(e) =>
                     setFormData({ ...formData, name: e.target.value })
