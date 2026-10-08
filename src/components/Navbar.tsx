@@ -50,7 +50,7 @@ export default function Navbar({
 
   const portfolioNavLinks = [
     { label: "About", href: "#hero" },
-    { label: "Project Gallery", href: "#gallery" },
+    { label: "Gallery", href: "#gallery" },
     { label: "Case Studies", href: "#case-studies" },
     ...(hasBlueprint
       ? [{ label: "Architecture", href: "#ai-architecture" }]
