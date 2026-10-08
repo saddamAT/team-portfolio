@@ -326,7 +326,7 @@ export default function ContactSection({
                   id="name"
                   type="text"
                   required
-                  placeholder="Enter Full Name"
+                  placeholder="name"
                   value={formData.name}
                   onChange={(e) =>
                     setFormData({ ...formData, name: e.target.value })
@@ -340,13 +340,13 @@ export default function ContactSection({
                   htmlFor="email"
                   className="block text-xs font-mono text-slate-300 mb-2"
                 >
-                  Email Address *
+                  Email *
                 </label>
                 <input
                   id="email"
                   type="email"
                   required
-                  placeholder="Enter Email Address"
+                  placeholder="email"
                   value={formData.email}
                   onChange={(e) =>
                     setFormData({ ...formData, email: e.target.value })
@@ -367,7 +367,7 @@ export default function ContactSection({
                 <input
                   id="company"
                   type="text"
-                  placeholder="Enter Company Name "
+                  placeholder="company"
                   value={formData.company}
                   onChange={(e) =>
                     setFormData({ ...formData, company: e.target.value })
